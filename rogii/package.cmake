@@ -4,30 +4,41 @@ endif()
 
 add_library(clipper2 STATIC IMPORTED)
 
+set_target_properties(
+    clipper2
+    PROPERTIES
+        INTERFACE_COMPILE_DEFINITIONS
+            "CLIPPER2_STATICLIB"
+)
+
+target_include_directories(
+    clipper2
+    SYSTEM INTERFACE
+        "${CMAKE_CURRENT_LIST_DIR}/include"
+)
+
+target_compile_options(
+    clipper2
+    INTERFACE
+        "$<$<CXX_COMPILER_ID:MSVC>:/external:W0>"
+)
+
 if(MSVC)
     set_target_properties(
         clipper2
         PROPERTIES
-            INTERFACE_COMPILE_DEFINITIONS
-                "CLIPPER2_STATICLIB"
             IMPORTED_LOCATION
                 "${CMAKE_CURRENT_LIST_DIR}/lib/Clipper2.lib"
             IMPORTED_LOCATION_DEBUG
                 "${CMAKE_CURRENT_LIST_DIR}/lib/Clipper2d.lib"
-            INTERFACE_INCLUDE_DIRECTORIES
-                "${CMAKE_CURRENT_LIST_DIR}/include"
     )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set_target_properties(
         clipper2
         PROPERTIES
-            INTERFACE_COMPILE_DEFINITIONS
-                "CLIPPER2_STATICLIB"
             IMPORTED_LOCATION
                 "${CMAKE_CURRENT_LIST_DIR}/lib/libClipper2.a"
             IMPORTED_LOCATION_DEBUG
                 "${CMAKE_CURRENT_LIST_DIR}/lib/libClipper2d.a"
-            INTERFACE_INCLUDE_DIRECTORIES
-                "${CMAKE_CURRENT_LIST_DIR}/include"
     )
 endif()
