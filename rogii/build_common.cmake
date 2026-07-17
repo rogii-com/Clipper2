@@ -148,11 +148,11 @@ file(
         "${CMAKE_INSTALL_PREFIX}"
 )
 
-# file(
-#     REMOVE_RECURSE
-#     "${DEBUG_PATH}"
-#     "${RELEASE_PATH}"
-# )
+file(
+    REMOVE_RECURSE
+    "${DEBUG_PATH}"
+    "${RELEASE_PATH}"
+)
 
 execute_process(
     COMMAND
