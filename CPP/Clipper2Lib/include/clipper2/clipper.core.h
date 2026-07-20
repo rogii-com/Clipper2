@@ -519,6 +519,10 @@ namespace Clipper2Lib
     return outstream;
   }
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4702)
+#endif
 
   template <typename T1, typename T2>
   inline Path<T1> ScalePath(const Path<T2>& path,
@@ -547,12 +551,21 @@ namespace Clipper2Lib
     return result;
   }
 
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
   template <typename T1, typename T2>
   inline Path<T1> ScalePath(const Path<T2>& path,
     double scale, int& error_code)
   {
     return ScalePath<T1, T2>(path, scale, scale, error_code);
   }
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4702)
+#endif
 
   template <typename T1, typename T2>
   inline Paths<T1> ScalePaths(const Paths<T2>& paths,
@@ -580,6 +593,10 @@ namespace Clipper2Lib
       { return ScalePath<T1, T2>(path, scale_x, scale_y, error_code); });
     return result;
   }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
   template <typename T1, typename T2>
   inline Paths<T1> ScalePaths(const Paths<T2>& paths,
@@ -679,6 +696,11 @@ namespace Clipper2Lib
 
   // Miscellaneous ------------------------------------------------------------
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4702)
+#endif
+
   inline void CheckPrecisionRange(int& precision, int& error_code)
   {
     if (precision >= -CLIPPER2_MAX_DEC_PRECISION &&
@@ -688,6 +710,10 @@ namespace Clipper2Lib
     precision = precision > 0 ? CLIPPER2_MAX_DEC_PRECISION : -CLIPPER2_MAX_DEC_PRECISION;
   }
 
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
   inline void CheckPrecisionRange(int& precision)
   {
     int error_code = 0;
@@ -696,7 +722,7 @@ namespace Clipper2Lib
 
   inline int TriSign(int64_t x) // returns 0, 1 or -1
   {
-    return (x > 0) - (x < 0); 
+    return (x > 0) - (x < 0);
   }
 
   struct UInt128Struct
@@ -996,9 +1022,9 @@ namespace Clipper2Lib
   }
 
   template<typename T>
-  inline int GetSign(const T& val) 
-  { 
-    if (!val) return 0; 
+  inline int GetSign(const T& val)
+  {
+    if (!val) return 0;
     return (val > 0) ? 1 : -1;
   }
 
@@ -1028,7 +1054,7 @@ namespace Clipper2Lib
       if (t > 0)  return (cp > 0 && t <= cp);
       else return (cp < 0 && t >= cp);        // true when t less neg. than cp
     }
-    else 
+    else
     {
       //result **excludes** segments that touch at an end point
       double t = ((seg1a.x - seg2a.x) * dy2 - (seg1a.y - seg2a.y) * dx2);
