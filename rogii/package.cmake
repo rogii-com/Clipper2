@@ -21,6 +21,7 @@ target_compile_options(
     clipper2
     INTERFACE
         "$<$<CXX_COMPILER_ID:MSVC>:/external:W0>"
+        "$<$<CXX_COMPILER_ID:MSVC>:/external:I${CMAKE_CURRENT_LIST_DIR}/include>"
 )
 
 if(MSVC)
